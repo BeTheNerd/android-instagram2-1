@@ -32,12 +32,12 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
-    <com.markupartist.android.widget.ActionBar
+    <com.actionbarsherlock.app.ActionBar
         android:id="@+id/popular_actionbar"
         style="@style/ActionBar"
         />
 
-    <GridView xmlns:android="http://schemas.android.com/apk/res/android"
+    <GridView 
               android:id="@+id/gridview"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"

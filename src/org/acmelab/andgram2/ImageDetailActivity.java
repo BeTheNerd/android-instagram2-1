@@ -43,7 +43,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.markupartist.android.widget.ActionBar;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -54,6 +53,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
+
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.SherlockActivity;
 
 import javax.net.ssl.SSLException;
 import java.io.*;
@@ -71,7 +73,7 @@ import java.util.List;
  * Shows a single image
  */
 
-public class ImageDetailActivity extends Activity {
+public class ImageDetailActivity extends SherlockActivity {
 
     private static final boolean debug = true;
     ActionBar actionBar;
@@ -87,15 +89,15 @@ public class ImageDetailActivity extends Activity {
         Bundle extras = getIntent().getExtras();
         id = extras.getString("id");
 
-        actionBar = (ActionBar) findViewById(R.id.detail_actionbar);
+        actionBar = this.getSupportActionBar();
         actionBar.setTitle(R.string.image_detail);
 
         Intent homeIntent = new Intent(getApplicationContext(), HomeActivity.class);
         homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 
-        final ActionBar.Action goHomeAction = new ActionBar.IntentAction(this,
+        /*final ActionBar.Action goHomeAction = new ActionBar.IntentAction(this,
                 homeIntent, R.drawable.ic_title_home);
-        actionBar.addAction(goHomeAction);
+        actionBar.addAction(goHomeAction);*/
 
         httpClient = new MyHttpClient(this);
 
@@ -324,13 +326,13 @@ public class ImageDetailActivity extends Activity {
 
     private class FetchImage extends AsyncTask<String, String, InstagramImage> {
         protected void onPreExecute() {
-            actionBar.setProgressBarVisibility(View.VISIBLE);
+            //actionBar.setProgressBarVisibility(View.VISIBLE);
             TextView caption = (TextView) findViewById(R.id.detail_username);
             caption.setText("Loading...");
         }
 
         protected void onPostExecute(InstagramImage image) {
-            actionBar.setProgressBarVisibility(View.GONE);
+            //actionBar.setProgressBarVisibility(View.GONE);
             drawImageDetails(image);
             new FetchBitmap().execute(image.standard_resolution);
         }
@@ -482,11 +484,11 @@ public class ImageDetailActivity extends Activity {
 
     private class FetchBitmap extends AsyncTask<String, String, Bitmap> {
         protected void onPreExecute() {
-            actionBar.setProgressBarVisibility(View.VISIBLE);
+            //actionBar.setProgressBarVisibility(View.VISIBLE);
         }
 
         protected void onPostExecute(Bitmap bitmap) {
-            actionBar.setProgressBarVisibility(View.GONE);
+            //actionBar.setProgressBarVisibility(View.GONE);
             drawImageBitmap(bitmap);
         }
 

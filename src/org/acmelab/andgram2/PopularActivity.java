@@ -37,7 +37,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
-import com.markupartist.android.widget.ActionBar;
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.SherlockActivity;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -55,7 +57,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class PopularActivity extends Activity {
+public class PopularActivity extends SherlockActivity {
 
     private static final boolean debug = true;
 
@@ -78,16 +80,16 @@ public class PopularActivity extends Activity {
         int titleId = extras.getInt("title");
         String title = getResources().getString(titleId);
 
-        actionBar = (ActionBar) findViewById(R.id.popular_actionbar);
+        actionBar = this.getSupportActionBar();
         actionBar.setTitle(title);
 
         Intent homeIntent = new Intent(getApplicationContext(), HomeActivity.class);
         homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 
-        actionBar.addAction(new RefreshAction());
+        /*actionBar.addAction(new RefreshAction());
         final ActionBar.Action goHomeAction = new ActionBar.IntentAction(this,
                 homeIntent, R.drawable.ic_title_home);
-        actionBar.addAction(goHomeAction);
+        actionBar.addAction(goHomeAction);*/
 
         // set that feedList to background downloader
         instagramImageList = new ArrayList<InstagramImage>();
@@ -129,11 +131,11 @@ public class PopularActivity extends Activity {
 
     private class FetchActivity extends AsyncTask<Void, String, Boolean> {
         protected void onPreExecute() {
-            actionBar.setProgressBarVisibility(View.VISIBLE);
+            //actionBar.setProgressBarVisibility(View.VISIBLE);
         }
 
         protected void onPostExecute(Boolean result) {
-            actionBar.setProgressBarVisibility(View.GONE);
+            //actionBar.setProgressBarVisibility(View.GONE);
 
             if(result) {
                 adapter.notifyDataSetChanged();
@@ -283,7 +285,7 @@ public class PopularActivity extends Activity {
         }
     }
 
-    private class RefreshAction implements ActionBar.Action {
+    private class RefreshAction /*implements ActionBar.Action*/ {
 
         public int getDrawable() {
             return R.drawable.ic_title_refresh;

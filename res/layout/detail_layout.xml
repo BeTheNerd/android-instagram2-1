@@ -38,7 +38,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
 
-        <com.markupartist.android.widget.ActionBar
+        <com.actionbarsherlock.app.ActionBar
                 android:id="@+id/detail_actionbar"
                 style="@style/ActionBar"
                 />
