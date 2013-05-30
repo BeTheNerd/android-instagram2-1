@@ -6,11 +6,11 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         >
-    <com.actionbarsherlock.app.ActionBar
+    <!-- <ActionBar
             android:id="@+id/homeActionbar"
             style="@style/ActionBar"
-            title="@string/app_name"
-            />
+            android:title="@string/app_name"
+            />-->
 
     <LinearLayout
             android:orientation="vertical"
