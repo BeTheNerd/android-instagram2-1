@@ -132,6 +132,11 @@ public class LoginActivity extends Activity {
 
     private String retrieveAccessCode(Uri uri) {
         if(uri != null) {
+        	if (!uri.isHierarchical())
+        	{
+        		// make hierarchical to avoid exception
+        		uri = Uri.parse("andgram://?" + uri.getQuery());
+        	}
             String access_code = uri.getQueryParameter("code");
             String error = uri.getQueryParameter("error");
             String error_reason = uri.getQueryParameter("error_reason");
